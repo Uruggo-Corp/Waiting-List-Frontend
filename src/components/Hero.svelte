@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center gap-12 container mx-auto ">
+	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-16 container mx-auto ">
 
 	<!-- The main text container -->
 
@@ -30,7 +30,7 @@
 		<!-- Circular Text -->
 
 		<p 
-		 class="text-[#adb643] absolute top-[-3.5em] circle-text" id="circleText">
+		 class="text-[#adb643] absolute top-[-3.5em] circle-text md:scale-[1]" id="circleText">
 			ent & Properties R
 		</p>
 
@@ -119,9 +119,9 @@
 		border-radius: 0px 50px 50px 50px;
 	}
 	.circle-text {
-		animation: rotate 4s linear infinite;
+		animation: rotate 6s linear infinite;
 		font-size: 16px;
-		scale: 0.7;
+		scale: .8;
 	}
 
 	@media screen and (min-width: 1024px) {
@@ -162,7 +162,7 @@
 			justify-content: start;
 			align-items: start;
 			gap: 2em;
-			margin-top: -3em;
+			margin-top: -7em;
 		}
 		.hero-content > p {
 			line-height: 40px;
