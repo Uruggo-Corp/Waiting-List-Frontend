@@ -1,6 +1,12 @@
 <script>
-	import './app.css';
+	import Navbar from '../components/Navbar.svelte';
+	import '../app.css';
+	import Footer from '../components/Footer.svelte';
+
 </script>
 
-<slot />
 
+
+	<Navbar />
+	<slot />
+	<Footer />

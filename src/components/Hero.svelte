@@ -1,0 +1,146 @@
+<script lang="ts">
+	import CircleType from 'circletype';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		const circleType = new CircleType(document.getElementById('circleText'));
+	});
+</script>
+
+<div class=" mt-10 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center gap-12 container mx-auto ">
+	<div class="text-white hero-header">
+		<h1 class="text-4xl hero-main-txt font-bold">Get on the Uruggo train!!</h1>
+	</div>
+
+	<div class="relative hero-image-container">
+		<p class="text-[#adb643] absolute top-[-3.5em] circle-text" id="circleText">ent & Properties R</p>
+
+		<img src="/assets/Hero-image.png" alt="" class="h-[400px] object-cover md:h-[600px] " />
+
+		<div
+			class="h-[380px]  w-[250px] border-[3.8px] border-[#9BA809] absolute top-10 left-10 md:h-[600px] md:w-[380px] md:top-8 md:left-14 z-[-4]"
+		/>
+	</div>
+
+	<div class="text-white hero-content flex flex-col justify-center items-center gap-6 lg:gap-4">
+		<p class="text-lg text-start">
+			Getting an apartment can be backbreaking! Uruggo makes it easy for house seekers to get their
+			desired apartments. <br />
+			We are building an all in one property and rent solution. Would you like to know when we launch?
+			Kindly drop your email below.
+		</p>
+		<form class="flex w-full hero-form flex-col items-center justify-center gap-4" action="">
+			<input
+				type="text"
+				aria-label="email input"
+				class="bg-[transparent] w-[50%] rounded-3xl p-2 outline-none border-[#DCDCDC] border-[1px]"
+				placeholder="Enter your email"
+			/>
+			<button aria-label="submit button" class="text-black w-28 submit-btn bg-[#adb643] py-2 px-4"
+				>Submit</button
+			>
+		</form>
+	</div>
+</div>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+
+	h1,
+	p {
+		font-family: 'Caudex', serif;
+	}
+	button {
+		font-family: 'DM Sans', sans-serif;
+	}
+
+	.submit-btn {
+		border-radius: 0px 50px 50px 50px;
+	}
+	.circle-text {
+		animation: rotate 4s linear infinite;
+		font-size: 16px;
+		scale: .7;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.container {
+			display: grid;
+			grid-template-areas:
+				'h m'
+				'c m';
+			margin-top: 3em;
+			padding: 0;
+		}
+		.hero-header {
+			grid-area: h;
+			margin-top: 9em;
+		}
+		.hero-main-txt {
+			font-size: 64px;
+			font-weight: 700;
+			font-family: 'Caudex', serif;
+		}
+
+		.hero-image-container {
+			grid-area: m;
+		}
+		.hero-image-container > div {
+			width: 380px;
+			height: 610px;
+			left: 3.5em;
+			top: 1.5em;
+		}
+		.hero-image-container > p {
+			font-size: 24px;
+			scale: 0.9;
+		}
+
+		.hero-content {
+			grid-area: c;
+			justify-content: start;
+			align-items: start;
+			gap: 2em;
+		}
+		.hero-content > p {
+			line-height: 40px;
+			text-align: left;
+			font-size: 22px;
+		}
+
+		form {
+			border: 1px solid white;
+			width: 100%;
+			flex-direction: row;
+			justify-content: space-between;
+			border-radius: 50px;
+			height: 100px;
+		}
+		form > button {
+			height: 100px;
+			width: 170px;
+			font-size: 24px;
+		}
+		form > input {
+			height: 100px;
+			border: none;
+			width: 170px;
+			font-size: 20px;
+			padding: 1em;
+		}
+	}
+
+	/* animation for the circle text */
+
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+</style>
