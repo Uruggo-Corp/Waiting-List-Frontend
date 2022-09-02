@@ -30,7 +30,7 @@
 		<!-- Circular Text -->
 
 		<p 
-		class="text-[#adb643] absolute top-[-3.5em] circle-text" id="circleText">
+		 class="text-[#adb643] absolute top-[-3.5em] circle-text" id="circleText">
 			ent & Properties R
 		</p>
 
@@ -38,7 +38,11 @@
 
 		<!-- Image -->
 
-		<img src="/assets/Hero-image.png" alt="" class="h-[400px] object-cover md:h-[600px] " />
+		<img 
+		 src="/assets/Hero-image.png" 
+		 alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables" 
+		 class="h-[400px] object-cover md:h-[600px] " 
+		/>
 
 		<!-- Image -->
 
@@ -54,7 +58,7 @@
 	<!-- The image and circular text container -->
 
 
-	<!-- Text Content -->
+	<!-- Text Content and Form -->
 	<div
 		class="text-white hero-content mt-4 flex flex-col justify-center items-center max-w-[700px] gap-6 lg:gap-4">
 		<p class="text-lg text-center">
@@ -69,6 +73,7 @@
 		<form class="flex w-full hero-form flex-col items-center justify-center gap-4" action="">
 			<input
 				type="text"
+				name="email-input"
 				aria-label="email input"
 				class="bg-[transparent] w-[70%] rounded-3xl p-2 outline-none border-[#DCDCDC] border-[1px]"
 				placeholder="Enter your email"
@@ -81,7 +86,7 @@
 
 	</div>
 
-	<!-- Text Content -->
+	<!-- Text Content and Form-->
 
 	<!-- Footer -->
 
