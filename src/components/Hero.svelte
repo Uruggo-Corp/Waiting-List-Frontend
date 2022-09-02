@@ -22,8 +22,8 @@
 		/>
 	</div>
 
-	<div class="text-white hero-content flex flex-col justify-center items-center gap-6 lg:gap-4">
-		<p class="text-lg text-start">
+	<div class="text-white hero-content mt-4 flex flex-col justify-center items-center max-w-[700px] gap-6 lg:gap-4">
+		<p class="text-lg text-center">
 			Getting an apartment can be backbreaking! Uruggo makes it easy for house seekers to get their
 			desired apartments. <br />
 			We are building an all in one property and rent solution. Would you like to know when we launch?
@@ -102,6 +102,7 @@
 			justify-content: start;
 			align-items: start;
 			gap: 2em;
+			margin-top: -3em;
 		}
 		.hero-content > p {
 			line-height: 40px;
