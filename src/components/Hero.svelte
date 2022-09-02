@@ -86,7 +86,7 @@
 	<!-- Footer -->
 
 	<div
-		class="text-[#6e6e58] font-bold text-base flex flex-wrap gap-5 items-center justify-center  md:text-2xl md:justify-start md:mx-0 mx-4"
+		class="text-[#6e6e58] font-bold text-base flex flex-wrap gap-5 items-center justify-center lg:gap-9 md:text-2xl md:justify-start md:mx-0 mx-4"
 	>
 		<p>Get a flatmate</p>
 		<p>Get an apartment</p>
@@ -181,7 +181,7 @@
 		form > input {
 			height: 100px;
 			border: none;
-			width: 170px;
+			width: 70%;
 			font-size: 20px;
 			padding: 1em;
 		}
