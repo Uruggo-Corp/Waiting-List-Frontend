@@ -69,11 +69,11 @@
 			class="opacity-0 invisible animate-fade flex flex-col justify-between gap-4 sm:gap-8 font-bold sm:w-[400px] sm:mt-[1em] text-center translate-y-[-30px]  z-10 bg-black  py-2 px-4 text-[#aeb08e] lg:text-xl lg:w-[400px] shadow-lg"
 		>
 			{#if status === 200 || status === 201}
-				<p>😊 Yeah, You've been added to the waitlist successfully!!.</p>
+				<p>You've been added to the waitlist successfully!!. 😊</p>
 
 				<span class=" left-[5px] bottom-[5px] w-0 h-1 bg-[#9BA809] rounded animate-progress" />
 			{:else if status === 409}
-				<p>😥 This email address already exists.</p>
+				<p>This email address already exists. 😥</p>
 
 				<span
 					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-gray-700 rounded animate-progress"
