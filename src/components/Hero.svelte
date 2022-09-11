@@ -1,8 +1,55 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import axios from 'axios';
 
 	// the library for the circular text
 	import CircleType from 'circletype';
+
+	let userEmail: string = '';
+	let emailAdded: boolean = false;
+	let status: number = 0;
+	let checkEmptyForm: boolean = false;
+
+	// function to add users to the waitlist
+	const submitUseremail = () => {
+		let url = 'https://waitlist-api.uruggo.com/wait-list';
+
+		if (userEmail.trim() !== '') {
+			axios
+				.post(url, {
+					email: userEmail
+				})
+				.then((res) => {
+					userEmail = '';
+					emailAdded = true;
+					status = res.status;
+					console.log(res);
+
+					setTimeout(() => {
+						emailAdded = false;
+						status = 0;
+					}, 4000);
+				})
+				.catch((err) => {
+					emailAdded = true;
+					status = err.response.status;
+
+					setTimeout(() => {
+						emailAdded = false;
+						status = 0;
+					}, 4000);
+				});
+		} else {
+			checkEmptyForm = true;
+			emailAdded = true;
+
+			setTimeout(() => {
+				emailAdded = false;
+				checkEmptyForm = false;
+			}, 4000);
+		}
+	};
+	// function to add users to the waitlist
 
 	// due to SSR we first need to let our component mount before being able to access the DOM and window object provided by javascript
 	onMount(() => {
@@ -11,15 +58,46 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Uruggo waitlist</title>
+</svelte:head>
+
+<!-- Pop up modal for the form -->
+<div class="flex item-center mt-[-3.5em] justify-center fixed w-screen z-10    	lg:mb-5">
+	{#if emailAdded}
+		<div
+			class="opacity-0 invisible animate-fade flex flex-col justify-between gap-4 sm:gap-8 font-bold sm:w-[400px] sm:mt-[1em] text-center translate-y-[-30px]  z-10 bg-black  py-2 px-4 text-[#aeb08e] lg:text-xl lg:w-[400px] shadow-lg"
+		>
+			{#if status === 200 || status === 201}
+				<p>😊 Yeah, You've been added to the waitlist successfully!!.</p>
+
+				<span class=" left-[5px] bottom-[5px] w-0 h-1 bg-[#9BA809] rounded animate-progress" />
+			{:else if status === 409}
+				<p>😥 This email address already exists.</p>
+
+				<span
+					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-gray-700 rounded animate-progress"
+				/>
+			{:else if checkEmptyForm}
+				<p>Please fill in your email address.</p>
+
+				<span
+					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-red-700 rounded animate-progress"
+				/>
+			{/if}
+		</div>
+	{/if}
+</div>
+<!-- Pop up modal for the form -->
+
 <div
-	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto "
->
+	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto ">
 	<!-- The image and circular text container -->
 
 	<div class="relative hero-image-container">
 		<!-- Circular Text -->
 
-		<p class="text-[#adb643] absolute top-[-3em] circle-text md:scale-[1]" id="circleText">
+		<p class="text-[#aeb08e] absolute -top-[3em] circle-text md:scale-[.8]" id="circleText">
 			ent & Properties R
 		</p>
 
@@ -30,7 +108,7 @@
 		<img
 			src="/assets/Hero.png"
 			alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
-			class="h-[400px] object-cover md:h-[600px] "
+			class="h-[400px] object-cover md:h-[600px] image"
 		/>
 
 		<!-- Image -->
@@ -56,20 +134,24 @@
 			<!-- Form to get waiting users email -->
 
 			<form
-				class="rounded-3xl h-[50px] flex border w-full hero-form items-center justify-center gap-4"
-				action=""
+				class="rounded-[50px] h-[60px] flex border w-full hero-form items-center justify-between gap-4"
+				on:submit|preventDefault={submitUseremail}
 			>
 				<input
-					type="text"
+					type="email"
 					name="email-input"
-					aria-label="email input"
+					aria-label="email-input"
 					class="bg-[transparent] w-[70%] h-full p-2 outline-none border-[#DCDCDC]"
+					bind:value={userEmail}
 					placeholder="Enter your email"
 				/>
 				<button
 					aria-label="submit button"
-					class="text-black w-28 h-full submit-btn bg-[#adb643] py-2 px-4">Submit</button
+					class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
+					type="submit"
 				>
+					Submit
+				</button>
 			</form>
 			<!-- Form to get waiting users email -->
 		</div>
@@ -116,7 +198,6 @@
 			text-align: start;
 		}
 
-
 		.hero-image-container > p {
 			font-size: 24px;
 			scale: 0.9;
@@ -156,6 +237,21 @@
 			width: 70%;
 			font-size: 20px;
 			padding: 1em;
+		}
+	}
+
+	@media screen and (max-width: 375px) {
+		.circle-text {
+			top: 5em;
+			left: 2.3em;
+			scale: 0.6;
+		}
+		.image {
+			width: 100%;
+			object-fit: cover;
+		}
+		.hero-image-container {
+			position: static;
 		}
 	}
 
