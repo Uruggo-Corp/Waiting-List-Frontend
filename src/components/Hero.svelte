@@ -120,7 +120,7 @@
 		<img
 			src="/assets/Hero.png"
 			alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
-			class="h-[400px] object-cover md:h-[600px] image"
+			class="h-[25em] object-cover md:h-[37em] image"
 		/>
 
 		<!-- Image -->
@@ -136,7 +136,7 @@
 		</h1>
 
 		<div class="text-white hero-content flex flex-col max-w-[700px] gap-6 lg:gap-4">
-			<p class="text-lg text-center">
+			<p class="text-lg text-left">
 				Getting an apartment can be backbreaking! Uruggo makes it easy for house seekers to get
 				their desired apartments. <br />
 				We are building an all in one property and rent solution. Would you like to know when we launch?
