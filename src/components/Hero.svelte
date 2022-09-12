@@ -159,9 +159,9 @@
 						class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
 						type="submit"
 					>
-						<div class="flex justify-center">
+						<div class="flex justify-center align-middle">
 							<div
-								class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"
+								class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 md:h-12 md:w-12 h-8 w-8 mb-4"
 							/>
 						</div>
 					</button>
