@@ -9,12 +9,16 @@
 	let emailAdded: boolean = false;
 	let status: number = 0;
 	let checkEmptyForm: boolean = false;
+	let loading = false;
+	let errorMessage: string | null;
 
 	// function to add users to the waitlist
 	const submitUseremail = () => {
 		let url = 'https://waitlist-api.uruggo.com/wait-list';
 
 		if (userEmail.trim() !== '') {
+			errorMessage = null;
+			loading = true;
 			axios
 				.post(url, {
 					email: userEmail
@@ -38,7 +42,8 @@
 						emailAdded = false;
 						status = 0;
 					}, 4000);
-				});
+				})
+				.finally(() => (loading = false));
 		} else {
 			checkEmptyForm = true;
 			emailAdded = true;
@@ -80,6 +85,12 @@
 				/>
 			{:else if checkEmptyForm}
 				<p>Please fill in your email address.</p>
+
+				<span
+					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-red-700 rounded animate-progress"
+				/>
+			{:else}
+				<p>There was an error adding you to the waitlist. Please try again another time.</p>
 
 				<span
 					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-red-700 rounded animate-progress"
@@ -146,13 +157,27 @@
 					bind:value={userEmail}
 					placeholder="Enter your email"
 				/>
-				<button
-					aria-label="submit button"
-					class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
-					type="submit"
-				>
-					Submit
-				</button>
+				{#if loading}
+					<button
+						aria-label="submit button"
+						class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
+						type="submit"
+					>
+						<div class="flex justify-center">
+							<div
+								class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"
+							/>
+						</div>
+					</button>
+				{:else}
+					<button
+						aria-label="submit button"
+						class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
+						type="submit"
+					>
+						Submit
+					</button>
+				{/if}
 			</form>
 			<!-- Form to get waiting users email -->
 		</div>
@@ -265,6 +290,30 @@
 		}
 
 		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.loader {
+		border-top-color: #333;
+		-webkit-animation: spinner 1.5s linear infinite;
+		animation: spinner 1.5s linear infinite;
+	}
+
+	@-webkit-keyframes spinner {
+		0% {
+			-webkit-transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+
+	@keyframes spinner {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
 			transform: rotate(360deg);
 		}
 	}
