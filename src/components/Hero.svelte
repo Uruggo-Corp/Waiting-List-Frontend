@@ -63,10 +63,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Uruggo waitlist</title>
-</svelte:head>
-
 <!-- Pop up modal for the form -->
 <div class="flex item-center mt-[-3.5em] justify-center fixed w-screen z-10    	lg:mb-5">
 	{#if emailAdded}
