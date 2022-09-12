@@ -19,7 +19,7 @@
 				.post(url, {
 					email: userEmail
 				})
-				.then((res) => {
+				.then((res: any) => {
 					userEmail = '';
 					emailAdded = true;
 					status = res.status;
@@ -30,7 +30,7 @@
 						status = 0;
 					}, 4000);
 				})
-				.catch((err) => {
+				.catch((err: any) => {
 					emailAdded = true;
 					status = err.response.status;
 
@@ -91,7 +91,8 @@
 <!-- Pop up modal for the form -->
 
 <div
-	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto ">
+	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto "
+>
 	<!-- The image and circular text container -->
 
 	<div class="relative hero-image-container">
