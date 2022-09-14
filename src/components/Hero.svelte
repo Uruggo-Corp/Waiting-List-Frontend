@@ -119,13 +119,6 @@
 			alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
 			class="h-[25em] object-cover md:h-[37em] image"
 		/>
-
-			<!-- <img
-				src="/assets/Hero.png"
-				alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
-				class="h-[400px] object-cover md:h-[600px] image"
-			/> -->
-
 			<!-- Image -->
 		</div>
 		<!-- The image and circular text container -->
@@ -133,7 +126,7 @@
 		<!-- Text Content and Form -->
 
 		<div class="flex flex-col hero gap-6 xl:w-[760px]">
-			<h1 class="xl:text-[60px] lg:text-[45px] text-white hero-header text-center hero-main-txt font-bold">
+			<h1 class="xl:text-[60px] text-4xl lg:text-[45px] text-white hero-header text-center hero-main-txt font-bold">
 				Get on the Uruggo train!!
 			</h1>
 
