@@ -1,4 +1,4 @@
-<div class="text-white text-[16px] flex flex-wrap justify-center gap-4 mb-4 max-w-[1224px] mx-4 lg:mx-auto lg:justify-start lg:text-2xl lg:gap-10 lg:mb-10">
+<div class="text-white text-[16px] flex flex-wrap justify-center gap-4 mb-4 max-w-[1224px] mx-4 lg:mx-auto lg:justify-start lg:text-lg xl:text-2xl lg:gap-10 lg:mb-10">
     <p>Get a flatmate</p>
     <p>Get an apartment</p>
     <p>Shortlets</p>

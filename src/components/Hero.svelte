@@ -9,16 +9,20 @@
 	let emailAdded: boolean = false;
 	let status: number = 0;
 	let checkEmptyForm: boolean = false;
+	let loading = false;
+	let errorMessage: string | null;
 
 	const submitUseremail = () => {
 		let url = 'https://waitlist-api.uruggo.com/wait-list';
 
 		if (userEmail.trim() !== '') {
+			errorMessage = null;
+			loading = true;
 			axios
 				.post(url, {
 					email: userEmail
 				})
-				.then((res) => {
+				.then((res: any) => {
 					userEmail = '';
 					emailAdded = true;
 					status = res.status;
@@ -29,7 +33,7 @@
 						status = 0;
 					}, 4000);
 				})
-				.catch((err) => {
+				.catch((err: any) => {
 					emailAdded = true;
 					status = err.response.status;
 
@@ -37,7 +41,8 @@
 						emailAdded = false;
 						status = 0;
 					}, 4000);
-				});
+				})
+				.finally(() => (loading = false));
 		} else {
 			checkEmptyForm = true;
 			emailAdded = true;
@@ -56,7 +61,10 @@
 	});
 </script>
 
-<div class="flex item-center mt-[-3.5em] justify-center fixed w-screen z-10    	lg:mb-5">
+
+
+<!-- Pop up modal for the form -->
+<div class="rounded-lg flex item-center mt-[-3.5em] justify-center fixed w-screen z-10 lg:mb-5">
 
 	{#if emailAdded}
 		<div
@@ -78,6 +86,12 @@
 				<span
 					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-red-700 rounded animate-progress"
 				/>
+			{:else}
+				<p>There was an error adding you to the waitlist. Please try again another time.</p>
+
+				<span
+					class=" left-[5px] bottom-[5px] w-0 h-1 bg-gradient-to-r from-[#9BA809] to-red-700 rounded animate-progress"
+				/>
 			{/if}
 		</div>
 	{/if}
@@ -85,7 +99,8 @@
 
 
 <div
-		class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto">
+	class=" mt-10 mb-8 px-3 py-2 max-w-[1224px] flex flex-col items-center justify-center lg:gap-24 gap-10 container mx-auto ">
+	<!-- The image and circular text container -->
 
 
 		<!-- The image and circular text container -->
@@ -99,12 +114,17 @@
 			<!-- Circular Text -->
 
 			<!-- Image -->
+		<img
+			src="/assets/Hero.png"
+			alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
+			class="h-[25em] object-cover md:h-[37em] image"
+		/>
 
-			<img
+			<!-- <img
 				src="/assets/Hero.png"
 				alt="A minimalist living space with a white backdrop and a single two sitter sofa with couple of wooden tables"
 				class="h-[400px] object-cover md:h-[600px] image"
-			/>
+			/> -->
 
 			<!-- Image -->
 		</div>
@@ -112,46 +132,65 @@
 
 		<!-- Text Content and Form -->
 
-		<div class="flex flex-col hero gap-6">
-			<h1 class="text-4xl text-white hero-header text-center hero-main-txt font-bold">
+		<div class="flex flex-col hero gap-6 xl:w-[760px]">
+			<h1 class="xl:text-[60px] lg:text-[45px] text-white hero-header text-center hero-main-txt font-bold">
 				Get on the Uruggo train!!
 			</h1>
 
 			<div class="text-white hero-content flex flex-col max-w-[700px] gap-6 lg:gap-4">
-				<p class="text-lg text-center">
+				<p class="xl:text-[24px] lg:leading-10 lg:text-lg lg:text-left text-center">
 					Getting an apartment can be backbreaking! Uruggo makes it easy for house seekers to get
 					their desired apartments. <br />
 					We are building an all in one property and rent solution. Would you like to know when we launch?
 					Kindly drop your email below.
 				</p>
 
-				<!-- Form to get waiting users email -->
+			<!-- Form to get waiting users email -->
 
-				<form
-					class="rounded-[50px] h-[60px] flex border w-full hero-form items-center justify-between gap-4"
-					on:submit|preventDefault={submitUseremail}
-				>
-					<input
-						type="email"
-						name="email-input"
-						aria-label="email-input"
-						class="bg-[transparent] ml-3 w-[70%] h-full p-2 outline-none border-[#DCDCDC]"
-						bind:value={userEmail}
-						placeholder="Enter your email"
-					/>
+			<form
+				class="rounded-[50px] h-[60px] lg:h-[70px] xl:h-[100px] flex border w-full hero-form items-center justify-between gap-4"
+				on:submit|preventDefault={submitUseremail}
+			>
+				<input
+					type="email"
+					name="email-input"
+					aria-label="email-input"
+					class="bg-[transparent] w-[70%] h-full p-2 outline-none border-[#DCDCDC]"
+					bind:value={userEmail}
+					placeholder="Enter your email"
+				/>
+				{#if loading}
 					<button
 						aria-label="submit button"
-						class="text-black w-28 h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
+						class="text-black w-28 lg:w-[180px] h-full submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
+						type="submit"
+					>
+						<div class="flex justify-center align-middle">
+							<div
+								class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 md:h-12 md:w-12 h-8 w-8 mb-4"
+							/>
+						</div>
+					</button>
+				{:else}
+					<button
+						aria-label="submit button"
+						class="text-black w-28 h-full lg:w-[150px] xl:w-[170px] lg:text-[24px] submit-btn bg-[#9BA809] hover:bg-[#EAF19F] py-2 px-4"
 						type="submit"
 					>
 						Submit
 					</button>
-				</form>
+
 				<!-- Form to get waiting users email -->
-			</div>
+		
+
+				{/if}
+			</form>
+			<!-- Form to get waiting users email -->
+		</div>
 		</div>
 		<!-- Text Content and Form-->
-	</div>
+</div>
+
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
@@ -175,62 +214,53 @@
 		scale: 1;
 	}
 
+	@media screen and (min-width: 1224px) {
+		
+	}
+
 	@media screen and (min-width: 1024px) {
 		.container {
 			display: flex;
 			flex-direction: row-reverse;
 			margin-top: 3em;
 			padding: 0;
+			width: 100%;
 		}
-		.hero-header {
-			margin-top: 1em;
-		}
+		
 		.hero-main-txt {
-			font-size: 64px;
 			font-weight: 700;
 			font-family: 'Caudex', serif;
 			text-align: start;
+			margin-top: 1em;
 		}
 
 		.hero-image-container > p {
 			font-size: 24px;
 			scale: 1;
 		}
+		
+		.image{
+			height: 100%;
+			width: 100%;
+		}
 
 		.hero {
-			gap: 4em;
-			margin-top: 0em;
+			gap: 2em;
+			margin-top: 1em;
 		}
 		.hero-content {
 			justify-content: start;
 			align-items: start;
 			gap: 2em;
 		}
-		.hero-content > p {
-			line-height: 40px;
-			text-align: left;
-			font-size: 22px;
-		}
-
-		form {
-			border: 1px solid white;
-			width: 100%;
-			flex-direction: row;
-			justify-content: space-between;
-			border-radius: 50px;
-			height: 100px;
-		}
-		form > button {
-			height: 100px;
-			width: 170px;
-			font-size: 24px;
-		}
+		
 		form > input {
-			height: 100px;
+			height: 70px;
 			border: none;
 			width: 70%;
 			font-size: 20px;
 			padding: 1em;
+			margin-left: 1em;
 		}
 	}
 
@@ -258,6 +288,30 @@
 		}
 
 		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.loader {
+		border-top-color: #333;
+		-webkit-animation: spinner 1.5s linear infinite;
+		animation: spinner 1.5s linear infinite;
+	}
+
+	@-webkit-keyframes spinner {
+		0% {
+			-webkit-transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+
+	@keyframes spinner {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
 			transform: rotate(360deg);
 		}
 	}
