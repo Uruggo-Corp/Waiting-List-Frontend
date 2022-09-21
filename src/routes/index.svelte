@@ -34,4 +34,5 @@
 
 </svelte:head>
 
+
 <Hero />
