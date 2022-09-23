@@ -6,7 +6,7 @@
 
 	let loader: any;
 	let time = 0;
-	let timer = 50;
+	let timer = 25;
 
 	function addOne() {
 		time += 1;
@@ -34,7 +34,6 @@
 		bind:this={loader}
 	>
 		<p class="text-[#9BA809] text-6xl text-center absolute">{time}%</p>
-		<img src="/assets/Uruggo.svg" class="logo opacity-25" alt="Uruggo's Logo" />
 	</div>
 	<!-- Preloader -->
 
@@ -55,13 +54,7 @@
 		animation-timing-function: ease-in-out;
 		animation-fill-mode: forwards;
 	}
-	.logo {
-		animation-name: sizeImage;
-		animation-duration: 2s;
-		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		animation-iteration-count: infinite;
-		animation-fill-mode: backwards;
-	}
+	
 	p {
 		font-family: 'DM Sans', sans-serif;
 	}
@@ -72,17 +65,6 @@
 		}
 		to {
 			transform: translateY(-100%);
-		}
-	}
-	@keyframes sizeImage {
-		0% {
-			scale: 1;
-		}
-		50% {
-			scale: 1.5;
-		}
-		100% {
-			scale: 1;
 		}
 	}
 </style>
